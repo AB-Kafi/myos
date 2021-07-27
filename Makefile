@@ -1,7 +1,7 @@
-GPPARAMS = -m32 -fno-stack-protector
+GPPARAMS = -m32 -fno-stack-protector -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
 ASPARAMS = --32
 LDPARAMS = -melf_i386
-objects = loader.o  gdt.o kernel.o
+objects = loader.o port.o gdt.o kernel.o
 
 %.o : %.cpp
 	gcc $(GPPARAMS) -o $@ -c $<
@@ -43,3 +43,6 @@ mykernel.iso: mykernel.bin
 run: mykernel.iso
 	(killall VirutalBox && sleep 1) || true 
 	VirtualBox --startvm "Myos" & 
+.PHONY: clean
+	clean: 
+				rm -f $(objects) mykernel.bin mykernel.iso
