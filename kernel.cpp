@@ -43,7 +43,8 @@ extern "C" void callConstructors() {
 
 extern "C" void kernelMain(const void *multiboot_structure,
                            uint32_t magicnumber) {
-  printf("this is awesome");
+  printf("this is awesome\n");
+  printf("life is beautiful");
   GlobalDescriptorTable gdt;
   while (1) {
   };
